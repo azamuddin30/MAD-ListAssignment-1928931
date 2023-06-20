@@ -73,14 +73,20 @@ class _MyHomePageState extends State<MyHomePage> {
   ];
 
   String? _myImagePath = "";
-  Image _myImage = Image.asset("assets/images/basket.jpg");
+  Image _myImage = Image.asset(
+    "assets/images/basket.jpg",
+    fit: BoxFit.fill,
+  );
 
   void setImage() {
     setState(() {
       _myImagePath = _fruitBasket
           .firstWhere((target) => target.name == _inputController.text)
           .filePath;
-      _myImage = Image.asset(_myImagePath!);
+      _myImage = Image.asset(
+        _myImagePath!,
+        fit: BoxFit.fill,
+      );
     });
   }
 
@@ -88,7 +94,10 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       final random = Random();
       _myImagePath = _fruitBasket[random.nextInt(_fruitBasket.length)].filePath;
-      _myImage = Image.asset(_myImagePath!);
+      _myImage = Image.asset(
+        _myImagePath!,
+        fit: BoxFit.fill,
+      );
     });
   }
 
@@ -119,7 +128,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
-        child: Column(
+        child: ListView(
           // Column is also a layout widget. It takes a list of children and
           // arranges them vertically. By default, it sizes itself to fit its
           // children horizontally, and tries to be as tall as its parent.
@@ -133,11 +142,10 @@ class _MyHomePageState extends State<MyHomePage> {
           // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
           // action in the IDE, or press "p" in the console), to see the
           // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
+          padding: const EdgeInsets.all(8),
           children: <Widget>[
-            Container(
-              padding: const EdgeInsets.all(8.0),
-              margin: const EdgeInsets.all(11.0),
+            FittedBox(
+              fit: BoxFit.fill,
               child: _myImage,
             ),
             Container(
